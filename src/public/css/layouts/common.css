@@ -45,15 +45,13 @@
     padding-right: 20px;
 }
 
-.header__nav__logout,
-.header__nav__mypage {
+.header__nav__item {
     display: flex;
     align-items: center;
     margin-right: 5px;
 }
 
-.header__nav__logout button,
-.header__nav__mypage button {
+.header__nav__item button {
     color: white;
     background-color: black;
     font-size: 14px;

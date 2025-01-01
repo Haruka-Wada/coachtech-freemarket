@@ -19,7 +19,7 @@
             <input name="password"></input>
         </div>
         <div class="register__button">
-            <button>登録する</button>
+            <button>ログインする</button>
         </div>
     </form>
 </div>
