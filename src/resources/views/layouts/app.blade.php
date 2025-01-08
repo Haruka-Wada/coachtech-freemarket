@@ -25,18 +25,18 @@
             </div>
             <div class="header__nav">
                 @if(Auth::check())
-                <div class="header__nav__item">
-                    <button>ログイン</button>
-                </div>
-                <div class="header__nav__item">
-                    <button>会員登録</button>
-                </div>
-                @else
                 <form action="/logout" class="header__nav__item">
                     <button>ログアウト</button>
                 </form>
                 <div class="header__nav__item">
                     <button>マイページ</button>
+                </div>
+                @else
+                <div class="header__nav__item">
+                    <button>ログイン</button>
+                </div>
+                <div class="header__nav__item">
+                    <button>会員登録</button>
                 </div>
                 @endif
                 <div class="header__nav__sell">

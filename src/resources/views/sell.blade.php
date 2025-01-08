@@ -28,6 +28,12 @@
                 <p>カテゴリー</p>
             </div>
             <div class="item__data">
+                <select name="category" id="category">
+                    <option value="" selected hidden>選択してください</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="item__label">
                 <p>商品の状態</p>
@@ -54,7 +60,7 @@
             <div class="item__label">
                 <p>商品の説明</p>
             </div>
-            <div class="item__data">
+            <div class="item__data-textarea">
                 <textarea name="description" id=""></textarea>
             </div>
         </div>
@@ -65,9 +71,12 @@
             <div class="item__label">
                 <p>販売価格</p>
             </div>
-            <div class="item__data">
-                <input type="text">
+            <div class="item__data price">
+                <input type="number" name="price" value="" placeholder="¥">
             </div>
+        </div>
+        <div class="item__button">
+            <button>出品する</button>
         </div>
     </form>
 </div>

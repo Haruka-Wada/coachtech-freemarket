@@ -15,5 +15,4 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', [ItemController::class, 'index']);
-Route::get('/register', [ItemController::class, 'register']);
 Route::get('/sell', [ItemController::class, 'sell']);

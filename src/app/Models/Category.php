@@ -11,4 +11,8 @@ class Category extends Model
 
     protected $fillable = ['name'];
     protected $guarded = ['id'];
+
+    public function items() {
+        return $this->belongsToMany(Item::class)->withTimestamps();
+    }
 }
