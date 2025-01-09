@@ -6,34 +6,24 @@
 
 @section('main')
 <ul id="tab" class="tab">
-    <li id="recommend" class="recommend">
+    <li class="recommend">
         <a href="/">おすすめ</a>
     </li>
-    <li id="mylist" class="mylist">マイリスト</li>
+    <li class="mylist">
+        <a href="/mylist">マイリスト</a>
+    </li>
 </ul>
 
-<div id="tabbody">
-    <div id="recommend" class="tabpage active">
-        @foreach($items as $item)
-        <div class="item">
-            <img src="{{ $item->image}}" alt="{{ $item->name }}">
-        </div>
-        @endforeach
+<div class="main__container">
+    @foreach($items as $item)
+    <div class="main__item">
+        <form action="/item/" method="get" class="main__form">
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <button class="main__item-button">
+                <img src="{{ $item->image}}" alt="{{ $item->name }}">
+            </button>
+        </form>
     </div>
-    <div id="mylist" class="tabpage">
-
-    </div>
+    @endforeach
 </div>
-
-<script type="text/javascript">
-    $(function() {
-        $('.tab li').click(function() {
-            var num = $('.tab li').index(this);
-            console.log(num);
-            $('.tab li').removeClass('active');
-            $(this).addClass('active');
-            $('.tabpage').removeClass('active').eq(num).addClass('active');
-        });
-    })
-</script>
 @endsection

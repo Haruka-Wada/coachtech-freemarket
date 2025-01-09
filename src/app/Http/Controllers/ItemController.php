@@ -19,6 +19,16 @@ class ItemController extends Controller
         return view('mylist', compact('items'));
     }
 
+    public function detail(Request $request) {
+        $item = Item::find($request->item_id);
+        return view('detail', compact('item'));
+    }
+
+    public function purchase(Request $request) {
+        $item = Item::find($request->item_id);
+        return view('purchase', compact('item'));
+    }
+
     public function sell() {
         $conditions = Condition::all();
         $categories = Category::all();

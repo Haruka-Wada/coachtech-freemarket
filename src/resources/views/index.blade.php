@@ -6,22 +6,24 @@
 
 @section('main')
 <ul id="tab" class="tab">
-    <li id="recommend" class="recommend active">おすすめ</li>
-    <li id="mylist" class="mylist">
+    <li class="recommend">
+        <a href="/">おすすめ</a>
+    </li>
+    <li class="mylist">
         <a href="/mylist">マイリスト</a>
     </li>
 </ul>
 
-<div id="tabbody">
-    <div id="recommend" class="tabpage active">
-        @foreach($items as $item)
-        <div class="item">
-            <img src="{{ $item->image}}" alt="{{ $item->name }}">
-        </div>
-        @endforeach
+<div class="main__container">
+    @foreach($items as $item)
+    <div class="main__item">
+        <form action="/item/" method="get" class="main__form">
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <button class="main__item-button">
+                <img src="{{ $item->image}}" alt="{{ $item->name }}">
+            </button>
+        </form>
     </div>
-    <div id="mylist" class="tabpage">
-
-    </div>
+    @endforeach
 </div>
 @endsection

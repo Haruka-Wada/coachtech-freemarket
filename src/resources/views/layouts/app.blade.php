@@ -30,7 +30,7 @@
                     <button>ログアウト</button>
                 </form>
                 <div class="header__nav__item">
-                    <button>マイページ</button>
+                    <button onclick="location.href='/'">マイページ</button>
                 </div>
                 @else
                 <div class="header__nav__item">
