@@ -25,7 +25,8 @@
             </div>
             <div class="header__nav">
                 @if(Auth::check())
-                <form action="/logout" class="header__nav__item">
+                <form action="/logout" method="post" class="header__nav__item">
+                    @csrf
                     <button>ログアウト</button>
                 </form>
                 <div class="header__nav__item">
