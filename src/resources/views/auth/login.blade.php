@@ -13,10 +13,20 @@
         @csrf
         <div class="main__item">
             <p>メールアドレス</p>
+            <div class="form__error">
+                @error('email')
+                {{ $message }}
+                @enderror
+            </div>
             <input type="email" name="email" value="{{ old('email') }}">
         </div>
         <div class="main__item">
             <p>パスワード</p>
+            <div class="form__error">
+                @error('password')
+                {{ $message }}
+                @enderror
+            </div>
             <input type="password" name="password">
         </div>
         <div class="register__button">

@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="item__purchase">
-                <form action="/purchase" method="get">
+                <form action="/purchase/" method="get">
                     <input type="hidden" name="item_id" value="{{ $item->id }}">
                     <button>購入する</button>
                 </form>

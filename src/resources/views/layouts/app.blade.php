@@ -34,7 +34,7 @@
                 </div>
                 @else
                 <div class="header__nav__item">
-                    <button>ログイン</button>
+                    <button onclick="location.href='/login'">ログイン</button>
                 </div>
                 <div class="header__nav__item">
                     <button onclick="location.href='/register'">会員登録</button>

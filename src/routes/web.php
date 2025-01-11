@@ -15,13 +15,13 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [ItemController::class, 'index']);
-Route::get('/item', [ItemController::class, 'detail']);
+Route::get('/item/{item_id?}', [ItemController::class, 'detail']);
 
 
 Route::middleware('auth')->group(function(){
     Route::get('/mylist', [ItemController::class, 'mylist']);
-    Route::get('/purchase', [ItemController::class, 'purchase'])->name('item.purchase');
-    Route::get('/purchase/address/', [UserController::class, 'address']);
-    Route::post('/purchase/address/', [UserController::class, 'update']);
+    Route::get('/purchase/address/{item_id?}', [UserController::class, 'address']);
+    Route::post('/purchase/address', [UserController::class, 'update']);
+    Route::get('/purchase/{item_id?}', [ItemController::class, 'purchase'])->name('item.purchase');
     Route::get('/sell', [ItemController::class, 'sell']);
 });
