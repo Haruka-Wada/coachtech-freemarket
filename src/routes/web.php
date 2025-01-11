@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +20,8 @@ Route::get('/item', [ItemController::class, 'detail']);
 
 Route::middleware('auth')->group(function(){
     Route::get('/mylist', [ItemController::class, 'mylist']);
-    Route::get('/purchase', [ItemController::class, 'purchase']);
+    Route::get('/purchase', [ItemController::class, 'purchase'])->name('item.purchase');
+    Route::get('/purchase/address/', [UserController::class, 'address']);
+    Route::post('/purchase/address/', [UserController::class, 'update']);
     Route::get('/sell', [ItemController::class, 'sell']);
 });

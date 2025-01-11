@@ -32,12 +32,17 @@
             </div>
             <div class="form__label-purchase">
                 <p>配送先</p>
-                <a href="/purchase/address">変更する</a>
+                <form action="/purchase/address" method="get">
+                    <input type="hidden" method="get" name="item_id" value="{{ $item->id }}">
+                    <button>変更する</button>
+                </form>
             </div>
             <div class="form__address">
-                {{ Auth::user()->post_code }}
-                {{ Auth::user()->address }}
-                {{ Auth::user()->building }}
+                <p>{{ Auth::user()->post_code }}</p>
+                <p>{{ Auth::user()->address }} {{ Auth::user()->building }}</p>
+                @if(!Auth::user()->post_code || !Auth::user()->address)
+                <p>配送先を変更してください</p>
+                @endif
             </div>
         </div>
     </div>

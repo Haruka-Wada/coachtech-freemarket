@@ -15,7 +15,7 @@
     <header class="header">
         <div class="header__wrapper">
             <div class="header__logo">
-                <img src="{{ asset('img/logo.svg') }}" alt="coachtech">
+                <a href="/"><img src="{{ asset('img/logo.svg') }}" alt="coachtechフリマ"></a>
             </div>
             <div class="header__search">
                 <form action="/search" method="post" class="header__search-form">
@@ -37,7 +37,7 @@
                     <button>ログイン</button>
                 </div>
                 <div class="header__nav__item">
-                    <button>会員登録</button>
+                    <button onclick="location.href='/register'">会員登録</button>
                 </div>
                 @endif
                 <div class="header__nav__sell">

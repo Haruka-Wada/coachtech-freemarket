@@ -11,7 +11,6 @@
 <div class="main__contents">
     <form action="/register" method="post">
         @csrf
-        <input type="hidden" name="name" value="null">
         <div class="main__item">
             <p>メールアドレス</p>
             <div class="form__error">

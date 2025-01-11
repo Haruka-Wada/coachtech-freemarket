@@ -60,8 +60,16 @@
     margin: 30px 0;
 }
 
-.form__label-purchase a {
-    text-decoration: none;
+.form__address p {
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin: 0 30px;
+}
+
+.form__label-purchase button {
+    border: none;
+    background-color: white;
+    color: #0073CC;
     font-size: 20px;
     margin-right: 40px;
 }
