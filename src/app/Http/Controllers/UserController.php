@@ -25,4 +25,8 @@ class UserController extends Controller
             'item_id' => $item_id
         ]));
     }
+
+    public function profile() {
+        return view('auth.profile');
+    }
 }

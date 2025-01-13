@@ -31,12 +31,6 @@ class ItemController extends Controller
         return view('purchase', compact('item'));
     }
 
-    public function sell() {
-        $conditions = Condition::all();
-        $categories = Category::all();
-        return view('sell', compact('conditions', 'categories'));
-    }
-
     public function favorite(Request $request) {
         $user_id = Auth::id();
         $item_id = $request->item_id;
@@ -55,6 +49,14 @@ class ItemController extends Controller
     }
 
     public function mypage() {
-        return view('mypage');
+        $items = Item::all();
+        return view('mypage', compact('items'));
+    }
+
+    public function sell()
+    {
+        $conditions = Condition::all();
+        $categories = Category::all();
+        return view('sell', compact('conditions', 'categories'));
     }
 }
