@@ -17,12 +17,12 @@ class ItemController extends Controller
     }
 
     public function mylist() {
-        $items = Item::all();
-        return view('mylist', compact('items'));
+        $favorites = Favorite::where('user_id', Auth::id())->get();
+        return view('mylist', compact('favorites'));
     }
 
     public function detail(Request $request) {
-        $item = Item::find($request->item_id);
+        $item = Item::withCount('favorite')->find($request->item_id);
         return view('detail', compact('item'));
     }
 
@@ -52,5 +52,9 @@ class ItemController extends Controller
         }
 
         return back();
+    }
+
+    public function mypage() {
+        return view('mypage');
     }
 }

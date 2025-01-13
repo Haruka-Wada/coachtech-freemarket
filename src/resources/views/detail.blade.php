@@ -36,7 +36,7 @@
                 @else
                 <div class="item__icon-star">
                     <img class="like-toggle liked" data-item-id="{{ $item->id }}" src="{{ asset('img/yellow_star.png')}}" id="liked" alt="お気に入り">
-                    <p class="like-counter">{{ $item->favorite_count }}</p>
+                    <p class="item__icon-star-counter">{{ $item->favorite_count }}</p>
                 </div>
                 <div class="item__icon-comment">
                     <img src="{{ asset('img/comment.jpeg')}}" alt="コメント">
@@ -49,7 +49,7 @@
                     <a href="/login">
                         <img class="like-toggle" src="{{ asset('img/star.png')}}" alt="お気に入り">
                     </a>
-                    <p class="like-counter">{{ $item->favorite_count }}</p>
+                    <p class="item__icon-star-counter">{{ $item->favorite_count }}</p>
                 </div>
                 <div class="item__icon-comment">
                     <img src="{{ asset('img/comment.jpeg')}}" alt="コメント">
@@ -88,43 +88,5 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    $(function() {
-        let like = $('.like-toggle');
-        let likeItemId;
-        like.on('click', function() {
-            let $this = $(this);
-            likeItemId = $this.data('item-id');
-
-            $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: '/favorite',
-                    method: 'POST',
-                    data: {
-                        'item_id': likeItemId
-                    }
-                })
-
-                .done(function(data) {
-                    $this.toggleClass('liked');
-                    $this.next('.like-counter').html(data.item_favorite_count);
-                    if ($this.hasClass('liked')) {
-                        let src = $this.attr('src').replace('star', 'yellow_star');
-                        $this.attr('src', src);
-                    } else {
-                        let src = $this.attr('src').replace('yellow_star', 'star');
-                        $this.attr('src', src);
-                    }
-                })
-
-                .fail(function() {
-                    console.log('fail')
-                })
-
-
-        })
-    })
-</script>
+<script src="{{ asset('js/favorite.js') }}"></script>
 @endsection

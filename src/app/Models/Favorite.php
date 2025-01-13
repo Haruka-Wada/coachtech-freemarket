@@ -20,8 +20,4 @@ class Favorite extends Model
         return $this->belongsTo(Item::class);
     }
 
-    public function alreadyLiked($user_id, $item_id) {
-        return $this->where('user_id', $user_id)->where('item_id', $item_id)->first();
-    }
-
 }
