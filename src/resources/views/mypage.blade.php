@@ -7,9 +7,13 @@
 @section('main')
 <div class="profile__wrapper">
     <div class="profile__contents">
-        <div class="profile__image"></div>
+        <div class="profile__image">
+            @if(Auth::user()->thumbnail)
+            <img src="{{ Auth::user()->thumbnail }}" alt="ユーザーサムネイル">
+            @endif
+        </div>
         <div class="profile__name">
-            <p>{{ !Auth::user()->name === null ? Auth::user()->name : "ユーザー名" }}</p>
+            <p>{{ Auth::user()->name ? Auth::user()->name : "ユーザー名" }}</p>
         </div>
     </div>
     <div class="profile__contents-edit">

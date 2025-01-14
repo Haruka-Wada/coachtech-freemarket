@@ -47,9 +47,9 @@
             </div>
         </div>
     </header>
-    <main class="main">
+    <div class="main">
         @yield('main')
-    </main>
+    </div>
 </body>
 
 </html>

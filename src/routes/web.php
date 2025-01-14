@@ -26,5 +26,6 @@ Route::middleware('auth')->group(function(){
     Route::post('/favorite', [ItemController::class, 'favorite']);
     Route::get('/mypage', [ItemController::class, 'mypage']);
     Route::get('/mypage/profile', [UserController::class, 'profile']);
+    Route::post('/mypage/profile', [UserController::class, 'store']);
     Route::get('/sell', [ItemController::class, 'sell']);
 });
