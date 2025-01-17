@@ -27,7 +27,7 @@
     </ul>
     <div class="item__contents" id="tabbody">
         <div class="item__content active">
-            @foreach($items as $item)
+            @foreach($sell_items as $item)
             <div class="item__image">
                 <form action="/item/" method="get" class="item__form">
                     <input type="hidden" name="item_id" value="{{ $item->id }}">

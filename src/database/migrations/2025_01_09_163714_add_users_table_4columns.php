@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddClicksTable4columns extends Migration
+class AddUsersTable4columns extends Migration
 {
     /**
      * Run the migrations.

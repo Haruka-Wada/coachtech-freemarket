@@ -16,8 +16,8 @@
                 <p>商品画像</p>
             </div>
             <div class="item__data-file">
-                <button type="button" for="upload" class="upload__button">画像を選択する</button>
-                <input type="file" id="upload" class="item__data-upload">
+                <button type="button" class="upload__button">画像を選択する</button>
+                <input type="file" class="item__data-upload" name="image">
             </div>
         </div>
         <div class="item__contents">
@@ -25,21 +25,32 @@
                 <p>商品の詳細</p>
             </div>
             <div class="item__label">
+                <p>ブランド名</p>
+            </div>
+            <div class="item__data">
+                <input type="text" class="item__data-input" name="brand">
+            </div>
+            <div class="item__label">
                 <p>カテゴリー</p>
             </div>
             <div class="item__data">
-                <select name="category" id="category">
-                    <option value="" selected hidden>選択してください</option>
+                <div class="item__data__checkbox-toggle" id="checkbox-toggle">
+                    <span>選択してください</span>
+                </div>
+                <div class="item__data__checkboxes" id="checkboxes">
                     @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <label class="item__data__checkbox-label">
+                        <input type="checkbox" name="category_ids[]" value="{{ $category->id }}">
+                        <span>{{ $category->name }}</span>
+                    </label>
                     @endforeach
-                </select>
+                </div>
             </div>
             <div class="item__label">
                 <p>商品の状態</p>
             </div>
-            <div class="item__data">
-                <select name="condition" id="condition">
+            <div class="item__data select">
+                <select name="condition_id" id="condition">
                     <option value="" selected hidden>選択してください</option>
                     @foreach($conditions as $condition)
                     <option value="{{ $condition->id }}">{{ $condition->name }}</option>
@@ -55,13 +66,13 @@
                 <p>商品名</p>
             </div>
             <div class="item__data">
-                <input type="text">
+                <input type="text" class="item__data-input" name="name">
             </div>
             <div class="item__label">
                 <p>商品の説明</p>
             </div>
             <div class="item__data-textarea">
-                <textarea name="description" id=""></textarea>
+                <textarea name="description"></textarea>
             </div>
         </div>
         <div class="item__contents">
@@ -72,7 +83,7 @@
                 <p>販売価格</p>
             </div>
             <div class="item__data price">
-                <input type="number" name="price" value="" placeholder="¥">
+                <input type="number" class="item__data-input" name="price" value="" placeholder="¥">
             </div>
         </div>
         <div class="item__button">
@@ -85,6 +96,18 @@
     document.querySelector(".upload__button").addEventListener("click", () => {
         document.querySelector(".item__data-upload").click();
     });
+
+    $(function() {
+        const checkboxToggle = document.getElementById('checkbox-toggle');
+        const checkboxes = document.getElementById('checkboxes')
+        checkboxToggle.addEventListener('click', function() {
+            if (checkboxes.style.display == "none") {
+                checkboxes.style.display = 'flex';
+            } else {
+                checkboxes.style.display = 'none';
+            }
+        })
+    })
 </script>
 
 @endsection

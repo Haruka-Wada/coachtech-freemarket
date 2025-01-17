@@ -42,7 +42,7 @@
                 </div>
                 @endif
                 <div class="header__nav__sell">
-                    <button>出品</button>
+                    <button onclick="location.href='/sell'">出品</button>
                 </div>
             </div>
         </div>

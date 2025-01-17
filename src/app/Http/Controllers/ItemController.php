@@ -45,18 +45,43 @@ class ItemController extends Controller
             $already_liked->delete();
         }
 
-        return back();
+        $favorite_counter = Item::withCount('favorite')->find($item_id)->favorite_count;
+        $param = [
+            'item_favorite_count' => $favorite_counter
+        ];
+
+        return response()->json($param);
     }
 
     public function mypage() {
         $items = Item::all();
-        return view('mypage', compact('items'));
+        $sell_items = Item::where('user_id', Auth::id())->get();
+        return view('mypage', compact('items', 'sell_items'));
     }
 
-    public function sell()
-    {
+    public function sell() {
         $conditions = Condition::all();
         $categories = Category::all();
         return view('sell', compact('conditions', 'categories'));
+    }
+
+    public function store(Request $request) {
+        $image = $request->file('image');
+        $path = $image->store('image', 'public');
+        $full_path = asset('storage/' . $path);
+
+        $item = Item::create([
+            'condition_id' => $request->condition_id,
+            'name' => $request->name,
+            'image' => $full_path,
+            'brand' => $request->brand,
+            'price' => $request->price,
+            'description' => $request->description,
+            'user_id' => Auth::id()
+        ]);
+
+        $item->categories()->sync($request->category_ids);
+
+        return redirect('/mypage');
     }
 }
