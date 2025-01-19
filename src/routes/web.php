@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/item/comment/{item_id?}', [ItemController::class, 'comment']);
 Route::get('/item/{item_id?}', [ItemController::class, 'detail']);
 
 
@@ -29,4 +30,6 @@ Route::middleware('auth')->group(function(){
     Route::post('/mypage/profile', [UserController::class, 'store']);
     Route::get('/sell', [ItemController::class, 'sell']);
     Route::post('/sell', [ItemController::class, 'store']);
+    Route::post('/comment', [ItemController::class, 'post']);
+    Route::post('/comment/delete', [ItemController::class, 'delete']);
 });

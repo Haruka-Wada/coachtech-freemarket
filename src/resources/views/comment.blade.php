@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+<link rel="stylesheet" href="{{ asset('css/comment.css') }}">
 @endsection
 
 @section('main')
@@ -57,34 +57,53 @@
                     <p class="item__icon-comment__counter">{{ $item->comments_count }}</p>
                 </div>
             </div>
-            <div class="item__purchase">
-                <form action="/purchase/" method="get">
+            <div class="item__comment-area">
+                @foreach($comments as $comment)
+                @if($comment->user_id === Auth::id())
+                <div class="comment-user-myself">
+                    <div class="comment-user-thumbnail">
+                        @if(Auth::user()->thumbnail)
+                            <img src="{{ Auth::user()->thumbnail }}" alt="{{ Auth::user()->name }}">
+                        @endif
+                    </div>
+                    <div class="comment-user-name">
+                        <p>{{ Auth::user()->name ? Auth::user()->name : "名前"}}</p>
+                    </div>
+                    <form action="/comment/delete" method="post">
+                        @csrf
+                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                        <button class="comment-delete">削除</button>
+                    </form>
+                </div>
+                @else
+                <div class="comment-user">
+                    <div class="comment-user-thumbnail">
+                        @if($comment->user->thumbnail)
+                            <img src="{{ $comment->user->thumbnail }}" alt="{{ $comment->user->name }}">
+                        @endif
+                    </div>
+                    <div class="comment-user-name">
+                        <p>{{ $comment->user->name ? $comment->user->name : "名前" }}</p>
+                    </div>
+                </div>
+                @endif
+                <div class="comment-text">
+                    {{ $comment->comment }}
+                </div>
+                @endforeach
+            </div>
+            <div class="item__comment-form">
+                <div class="comment-form-title">
+                    <p>商品へのコメント</p>
+                </div>
+                <form action="/comment" method="post">
+                    @csrf
                     <input type="hidden" name="item_id" value="{{ $item->id }}">
-                    <button>購入する</button>
+                    <textarea name="comment" class="comment-form-textarea"></textarea>
+                    <div class="comment-form-button">
+                        <button>コメントを送信する</button>
+                    </div>
                 </form>
-            </div>
-            <div class="item__index">
-                <h2>商品説明</h2>
-            </div>
-            <div class="item__text">
-                {{ $item->description}}
-            </div>
-            <div class="item__index">
-                <h2>商品の情報</h2>
-            </div>
-            <div class="item__label">
-                <div class="item__label-index">
-                    <h3>カテゴリー</h3>
-                </div>
-                <div class="item__label-category">
-                    @foreach($item->categories as $category)
-                    <p>{{ $category->name }}</p>
-                    @endforeach
-                </div>
-            </div>
-            <div class="item__label">
-                <h3>商品の状態</h3>
-                <p class="item__label-condition">{{ $item->condition->name }}</p>
             </div>
         </div>
     </div>

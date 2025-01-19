@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Condition;
 use App\Models\Item;
 use App\Models\Favorite;
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +24,7 @@ class ItemController extends Controller
     }
 
     public function detail(Request $request) {
-        $item = Item::withCount('favorite')->find($request->item_id);
+        $item = Item::withCount(['favorites', 'comments'])->find($request->item_id);
         return view('detail', compact('item'));
     }
 
@@ -45,9 +47,9 @@ class ItemController extends Controller
             $already_liked->delete();
         }
 
-        $favorite_counter = Item::withCount('favorite')->find($item_id)->favorite_count;
+        $favorites_counter = Item::withCount('favorites')->find($item_id)->favorites_count;
         $param = [
-            'item_favorite_count' => $favorite_counter
+            'item_favorite_count' => $favorites_counter
         ];
 
         return response()->json($param);
@@ -83,5 +85,27 @@ class ItemController extends Controller
         $item->categories()->sync($request->category_ids);
 
         return redirect('/mypage');
+    }
+
+    public function comment(Request $request) {
+        $item = Item::withCount(['favorites', 'comments'])->find($request->item_id);
+        $comments = Comment::with('user')->get();
+        return view('comment', compact('item', 'comments'));
+    }
+
+    public function post(Request $request) {
+        Comment::create([
+            'comment' => $request->comment,
+            'user_id' => Auth::id(),
+            'item_id' => $request->item_id
+        ]);
+
+        return back();
+    }
+
+    public function delete(Request $request) {
+        Comment::find($request->comment_id)->delete();
+
+        return back();
     }
 }
