@@ -62,9 +62,10 @@
             </div>
         </div>
         <div class="purchase__button">
-            <form action="/purchase" method="get">
+            <form action="{{ route('checkout.session') }}" method="GET">
+                @csrf
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
-                <button>購入する</button>
+                <button class="purchase__button-btn">購入する</button>
             </form>
         </div>
     </div>

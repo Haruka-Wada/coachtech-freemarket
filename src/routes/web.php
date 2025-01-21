@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StripeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +33,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/sell', [ItemController::class, 'store']);
     Route::post('/comment', [ItemController::class, 'post']);
     Route::post('/comment/delete', [ItemController::class, 'delete']);
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
+    Route::get('/checkout-payment', [StripeController::class, 'checkout'])->name('checkout.session');
 });
